@@ -3,127 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HVN444 | ASCEND. YOUR. SOUND.</title>
+    <title>HVN444 | ASCEND YOUR SOUND</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@300;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --ch-silver: #a8a8a8;
+            --ch-black: #050505;
+        }
         body {
-            background-color: #0a0a0a;
-            color: #e5e5e5;
+            background-color: var(--ch-black);
+            color: #ffffff;
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
-        .hero-text {
-            font-weight: 900;
-            letter-spacing: -0.05em;
-            text-transform: uppercase;
+        .gothic {
+            font-family: 'UnifrakturMaguntia', serif;
         }
-        .artist-card:hover {
-            background-color: #1a1a1a;
-            transform: translateY(-2px);
-            transition: all 0.3s ease;
+        /* Grainy Film Texture */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain_Texture.png');
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 50;
         }
-        .strikethrough-title {
-            position: relative;
-            display: inline-block;
+        .silver-hover:hover {
+            color: var(--ch-silver);
+            text-shadow: 0 0 8px rgba(168, 168, 168, 0.4);
+            transition: all 0.4s ease;
         }
-        .strikethrough-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 100%;
-            height: 2px;
-            background: white;
+        .artist-border {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: linear-gradient(145deg, #0a0a0a, #050505);
+        }
+        .artist-border:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .dagger-divider::before {
+            content: "†";
+            display: block;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: #444;
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <nav class="flex justify-between items-center p-8 uppercase tracking-widest text-xs border-b border-white/10">
-        <div class="font-bold text-lg">HVN444</div>
-        <div class="space-x-8 hidden md:flex">
-            <a href="#roster" class="hover:text-white transition">Roster</a>
-            <a href="https://discord.gg/NQ54ycV8m" target="_blank" class="hover:text-white transition">Discord</a>
-            <a href="#" class="hover:text-white transition">Media</a>
+    <nav class="flex justify-between items-center p-10 uppercase tracking-[0.3em] text-[10px] border-b border-white/5">
+        <div class="gothic text-3xl silver-hover cursor-default">Hvn444</div>
+        <div class="space-x-10 hidden md:flex">
+            <a href="#roster" class="hover:line-through transition">Roster</a>
+            <a href="https://discord.gg/NQ54ycV8m" target="_blank" class="hover:line-through transition">Discord</a>
         </div>
     </nav>
 
-    <header class="py-24 px-8 text-center border-b border-white/10">
-        <h1 class="hero-text text-6xl md:text-9xl mb-4 italic">HVN444</h1>
-        <p class="text-gray-500 tracking-[0.5em] text-sm mb-8 uppercase">Ascend. Your. Sound.</p>
-        <div class="flex justify-center space-x-4">
-             <a href="https://discord.gg/NQ54ycV8m" class="px-8 py-3 bg-white text-black font-bold uppercase text-xs hover:bg-gray-300 transition">Join the Collective</a>
-        </div>
+    <header class="py-32 px-8 text-center">
+        <h1 class="gothic text-8xl md:text-[12rem] mb-2 leading-none">Hvn444</h1>
+        <p class="tracking-[1em] text-[10px] uppercase text-gray-500 mb-12 italic">Ascend. Your. Sound.</p>
+        <div class="dagger-divider"></div>
     </header>
 
-    <section id="roster" class="py-20 px-8 max-w-6xl mx-auto">
+    <section id="roster" class="max-w-5xl mx-auto px-8 pb-32">
         
-        <h2 class="text-3xl font-bold mb-12 uppercase tracking-tighter">***Over All***</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-            <div class="artist-card border border-white/10 p-8">
-                <h3 class="text-2xl font-black mb-4">120rnds</h3>
-                <div class="flex space-x-4 text-xs font-bold uppercase text-gray-500">
-                    <a href="https://open.spotify.com" class="hover:text-white">Spotify</a>
-                    <a href="https://music.apple.com" class="hover:text-white">Apple</a>
+        <div class="mb-24">
+            <h2 class="gothic text-4xl mb-10 text-center">Over All</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="artist-border p-10 text-center group">
+                    <h3 class="text-3xl font-black uppercase tracking-tighter mb-6 group-hover:italic transition-all">120rnds</h3>
+                    <div class="flex justify-center space-x-6 text-[9px] tracking-widest text-gray-600">
+                        <a href="#" class="silver-hover uppercase">Spotify</a>
+                        <a href="#" class="silver-hover uppercase">Apple</a>
+                    </div>
                 </div>
-            </div>
-            <div class="artist-card border border-white/10 p-8">
-                <h3 class="text-2xl font-black mb-4">StreetsNextNick</h3>
-                <div class="flex space-x-4 text-xs font-bold uppercase text-gray-500">
-                    <a href="#" class="hover:text-white">Spotify</a>
-                    <a href="#" class="hover:text-white">Apple</a>
+                <div class="artist-border p-10 text-center group">
+                    <h3 class="text-3xl font-black uppercase tracking-tighter mb-6 group-hover:italic transition-all">StreetsNextNick</h3>
+                    <div class="flex justify-center space-x-6 text-[9px] tracking-widest text-gray-600">
+                        <a href="#" class="silver-hover uppercase">Spotify</a>
+                        <a href="#" class="silver-hover uppercase">Apple</a>
+                    </div>
                 </div>
-            </div>
-            <div class="artist-card border border-white/10 p-8">
-                <h3 class="text-2xl font-black mb-4">Eurocyphic</h3>
-                <div class="flex space-x-4 text-xs font-bold uppercase text-gray-500">
-                    <a href="#" class="hover:text-white">Spotify</a>
-                    <a href="#" class="hover:text-white">Apple</a>
+                <div class="artist-border p-10 text-center group">
+                    <h3 class="text-3xl font-black uppercase tracking-tighter mb-6 group-hover:italic transition-all">Eurocyphic</h3>
+                    <div class="flex justify-center space-x-6 text-[9px] tracking-widest text-gray-600">
+                        <a href="#" class="silver-hover uppercase">Spotify</a>
+                        <a href="#" class="silver-hover uppercase">Apple</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <h2 class="text-3xl font-bold mb-12 uppercase tracking-tighter">***Members***</h2>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div class="artist-card border border-white/5 p-6 grayscale hover:grayscale-0">
-                <h4 class="font-bold mb-2">d4nii</h4>
-                <a href="https://music.apple.com/us/artist/d4nny/669837165" class="text-[10px] uppercase text-gray-600 hover:text-white">Profile &rarr;</a>
-            </div>
-            <div class="artist-card border border-white/5 p-6">
-                <h4 class="font-bold mb-2">KD!</h4>
-                <a href="#" class="text-[10px] uppercase text-gray-600 hover:text-white">Profile &rarr;</a>
-            </div>
-            <div class="artist-card border border-white/5 p-6">
-                <h4 class="font-bold mb-2">xviiteen</h4>
-                <a href="https://music.apple.com/us/artist/16teen/1505637009" class="text-[10px] uppercase text-gray-600 hover:text-white">Profile &rarr;</a>
-            </div>
-            <div class="artist-card border border-white/5 p-6">
-                <h4 class="font-bold mb-2">uchiha42</h4>
-                <a href="#" class="text-[10px] uppercase text-gray-600 hover:text-white">Profile &rarr;</a>
-            </div>
-            <div class="artist-card border border-white/5 p-6">
-                <h4 class="font-bold mb-2">sk3tch</h4>
-                <a href="https://music.apple.com/us/artist/sk3tch/1700387356" class="text-[10px] uppercase text-gray-600 hover:text-white">Profile &rarr;</a>
-            </div>
-            <div class="artist-card border border-white/5 p-6">
-                <h4 class="font-bold mb-2">33rnds</h4>
-                <a href="https://music.apple.com/us/artist/33degrees/834991889" class="text-[10px] uppercase text-gray-600 hover:text-white">Profile &rarr;</a>
-            </div>
-            <div class="artist-card border border-white/5 p-6">
-                <h4 class="font-bold mb-2">vax</h4>
-                <a href="https://music.apple.com/az/artist/vax/1561357445" class="text-[10px] uppercase text-gray-600 hover:text-white">Profile &rarr;</a>
+        <div>
+            <h2 class="gothic text-4xl mb-10 text-center">Members</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="artist-border p-6 text-center">
+                    <span class="block text-xs uppercase tracking-widest mb-4">d4nii</span>
+                    <a href="https://music.apple.com/us/artist/d4nny/669837165" class="gothic text-lg silver-hover">† Link</a>
+                </div>
+                <div class="artist-border p-6 text-center">
+                    <span class="block text-xs uppercase tracking-widest mb-4">KD!</span>
+                    <a href="#" class="gothic text-lg silver-hover">† Link</a>
+                </div>
+                <div class="artist-border p-6 text-center">
+                    <span class="block text-xs uppercase tracking-widest mb-4">xviiteen</span>
+                    <a href="https://music.apple.com/us/artist/16teen/1505637009" class="gothic text-lg silver-hover">† Link</a>
+                </div>
+                <div class="artist-border p-6 text-center">
+                    <span class="block text-xs uppercase tracking-widest mb-4">sk3tch</span>
+                    <a href="https://music.apple.com/us/artist/sk3tch/1700387356" class="gothic text-lg silver-hover">† Link</a>
+                </div>
+                <div class="artist-border p-6 text-center">
+                    <span class="block text-xs uppercase tracking-widest mb-4">33rnds</span>
+                    <a href="https://music.apple.com/us/artist/33degrees/834991889" class="gothic text-lg silver-hover">† Link</a>
+                </div>
+                <div class="artist-border p-6 text-center">
+                    <span class="block text-xs uppercase tracking-widest mb-4">vax</span>
+                    <a href="https://music.apple.com/az/artist/vax/1561357445" class="gothic text-lg silver-hover">† Link</a>
+                </div>
+                <div class="artist-border p-6 text-center">
+                    <span class="block text-xs uppercase tracking-widest mb-4">uchiha42</span>
+                    <a href="#" class="gothic text-lg silver-hover">† Link</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-20 px-8 border-t border-white/10 text-center">
-        <div class="mb-8">
-            <h2 class="hero-text text-4xl mb-2">HVN444</h2>
-            <p class="text-xs text-gray-600 uppercase">© 2026 HVN444 Media. All Rights Reserved.</p>
+    <footer class="p-20 border-t border-white/5 text-center bg-[#030303]">
+        <div class="gothic text-5xl mb-6">Hvn444</div>
+        <p class="text-[9px] tracking-[0.4em] text-gray-500 uppercase mb-8">Ascend. Your. Sound.</p>
+        <div class="text-[10px] text-gray-700 max-w-sm mx-auto uppercase leading-loose">
+            The HVN444 Name and logo are Trademarks by HVN444 Media.<br>
+            All Rights Reserved 2026.
         </div>
-        <p class="text-[10px] text-gray-700 max-w-md mx-auto italic">
-            "The HVN444 Name and logo are Trademarks by HVN444 Media. Ascend. Your. Sound."
-        </p>
     </footer>
 
 </body>
