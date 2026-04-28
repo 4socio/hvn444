@@ -1,145 +1,850 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HVN444: WE ASCEND YOUR MUSIC</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Inter:wght@200;400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-black: #080808;
-            --text-silver: #d1d1d1;
-            --border-muted: rgba(255, 255, 255, 0.08);
-        }
-        body {
-            background-color: var(--bg-black);
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.02em;
-        }
-        .serif-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 300;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-        }
-        .artist-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.75rem;
-            letter-spacing: 0.1em;
-            transition: all 0.5s ease;
-        }
-        .artist-card:hover .artist-name {
-            color: var(--text-silver);
-            letter-spacing: 0.15em;
-            font-style: italic;
-        }
-        .spotify-link {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            color: #666;
-            transition: color 0.3s ease;
-        }
-        .spotify-link:hover {
-            color: #ffffff;
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
-        /* Smooth Fade-in Animation */
-        .fade-in {
-            animation: fadeIn 1.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HVN444 — Ascend. Your. Sound.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IM+Fell+English:ital@0;1&family=Space+Mono:wght@400;700&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030303;
+      --surface: #0c0c0c;
+      --surface2: #121212;
+      --border: #1a1a1a;
+      --border2: #2a2a2a;
+      --white: #e8e4dc;
+      --white2: #c0bbaf;
+      --gray: #555550;
+      --text: #888880;
+      --accent: #d6d0c4;
+      --dim: rgba(220,215,200,0.06);
+      --glow: rgba(220,215,200,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    /* grain + vignette */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 70% at 50% 50%, transparent 40%, rgba(0,0,0,0.78) 100%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9000;
+    }
+
+    /* scrawled letter bg */
+    .scrawl-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0.042;
+    }
+    .scrawl-bg svg { width: 100%; height: 100%; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 52px;
+      background: linear-gradient(180deg, rgba(3,3,3,0.97) 0%, transparent 100%);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(220,215,200,0.05);
+    }
+
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 0.3em;
+      color: var(--white);
+      text-decoration: none;
+      text-shadow: 0 0 40px var(--glow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white2); }
+
+    .nav-discord {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--white2);
+      padding: 9px 22px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: all 0.3s;
+    }
+    .nav-discord:hover {
+      background: transparent;
+      color: var(--white2);
+      border-color: var(--white2);
+    }
+
+    /* PAGE SECTIONS */
+    .page-section { display: none; position: relative; z-index: 1; }
+    .page-section.active { display: block; }
+    #page-home { display: block; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 24px 100px;
+    }
+
+    /* ruled lines */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        0deg, transparent, transparent 39px,
+        rgba(220,215,200,0.025) 39px, rgba(220,215,200,0.025) 40px
+      );
+      pointer-events: none;
+    }
+
+    .hero-ghost {
+      position: absolute;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(140px, 26vw, 380px);
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(220,215,200,0.055);
+      letter-spacing: 0.02em;
+      user-select: none;
+      pointer-events: none;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      letter-spacing: 0.14em;
+      color: var(--gray);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: riseIn 1s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(64px, 13vw, 180px);
+      line-height: 0.92;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      text-shadow: 0 0 80px rgba(220,215,200,0.07), 0 2px 4px rgba(0,0,0,0.9);
+      opacity: 0;
+      animation: riseIn 1s 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    .hero-rule {
+      width: 1px; height: 48px;
+      background: linear-gradient(180deg, var(--border2), transparent);
+      margin: 32px auto;
+      opacity: 0;
+      animation: riseIn 1s 0.6s forwards;
+    }
+
+    .hero-tagline {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.2vw, 1.4rem);
+      letter-spacing: 0.1em;
+      color: var(--text);
+      opacity: 0;
+      animation: riseIn 1s 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .hero-tagline em { color: var(--white2); font-style: normal; }
+
+    .hero-cta {
+      margin-top: 52px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: riseIn 1s 0.9s forwards;
+    }
+
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-primary {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--white2);
+      padding: 14px 38px;
+      text-decoration: none;
+      border: 1px solid var(--white2);
+      transition: all 0.3s;
+    }
+    .btn-primary:hover { background: transparent; color: var(--white2); }
+
+    .btn-outline {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gray);
+      background: transparent;
+      padding: 14px 38px;
+      text-decoration: none;
+      border: 1px solid var(--border2);
+      transition: all 0.3s;
+    }
+    .btn-outline:hover { border-color: var(--gray); color: var(--white2); }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      animation: riseIn 1s 1.2s forwards;
+    }
+    .scroll-indicator span {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.7rem;
+      color: var(--gray);
+      letter-spacing: 0.15em;
+    }
+    .scroll-line {
+      width: 1px; height: 44px;
+      background: linear-gradient(180deg, var(--border2), transparent);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+    /* SECTIONS */
+    section {
+      padding: 120px 52px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 64px;
+    }
+
+    .section-tag {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+      white-space: nowrap;
+    }
+
+    .section-rule {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border2), transparent);
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: clamp(40px, 6vw, 80px);
+      line-height: 1;
+      letter-spacing: 0.05em;
+      color: var(--white);
+    }
+
+    /* ARTISTS */
+    #page-artists section { padding-top: 160px; }
+
+    .year-badge {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .tier { margin-bottom: 80px; }
+
+    .tier-label {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      color: var(--gray);
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+    }
+
+    .artists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .artist-card {
+      background: var(--bg);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    /* ruled lines on card */
+    .artist-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        0deg, transparent, transparent 23px,
+        rgba(220,215,200,0.022) 23px, rgba(220,215,200,0.022) 24px
+      );
+      pointer-events: none;
+    }
+
+    .artist-card:hover { background: var(--surface); }
+
+    .artist-index {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.7rem;
+      color: var(--border2);
+      margin-bottom: 14px;
+      letter-spacing: 0.1em;
+    }
+
+    .artist-name {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      color: var(--white);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s;
+    }
+    .artist-card:hover .artist-name { color: var(--accent); }
+    .artist-name.yen-tier { color: var(--white2); }
+
+    .tier-icon {
+      position: absolute;
+      bottom: 18px; right: 24px;
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 2.5rem;
+      color: rgba(220,215,200,0.04);
+      z-index: 0;
+      line-height: 1;
+      transition: color 0.3s;
+    }
+    .artist-card:hover .tier-icon { color: rgba(220,215,200,0.09); }
+
+    /* DISCORD BANNER */
+    .discord-banner {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-left: 2px solid var(--white2);
+      padding: 44px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .discord-text h3 {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 0.06em;
+      color: var(--white);
+    }
+
+    .discord-text p {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-top: 6px;
+    }
+
+    /* ABOUT */
+    #page-about section { padding-top: 160px; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-text {
+      font-family: 'IM Fell English', serif;
+      font-size: 1rem;
+      line-height: 2.1;
+      color: var(--text);
+    }
+    .about-text p + p { margin-top: 20px; }
+    .about-text strong { color: var(--white2); font-weight: 400; font-style: italic; }
+
+    .trademark-box {
+      margin-top: 48px;
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--border2);
+      padding: 36px 40px;
+      font-family: 'IM Fell English', serif;
+      font-size: 0.9rem;
+      line-height: 2;
+      color: var(--text);
+      position: relative;
+    }
+    .trademark-box::before {
+      content: '✦';
+      position: absolute;
+      top: -10px; left: 20px;
+      font-size: 0.8rem;
+      color: var(--border2);
+      background: var(--bg);
+      padding: 0 8px;
+    }
+    .trademark-box strong { color: var(--white2); font-style: italic; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .stat-box {
+      background: var(--bg);
+      padding: 32px 28px;
+      transition: background 0.3s;
+    }
+    .stat-box:hover { background: var(--surface); }
+
+    .stat-num {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 2.6rem;
+      color: var(--white);
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-top: 8px;
+      display: block;
+      letter-spacing: 0.06em;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 56px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-logo {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 2rem;
+      letter-spacing: 0.2em;
+      color: var(--white);
+    }
+
+    .footer-tagline {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 4px;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .footer-links a:hover { color: var(--white2); }
+
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--border2);
+      letter-spacing: 0.1em;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .home-discord-wrap {
+      padding: 0 52px 100px;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      section { padding: 80px 20px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      footer { padding: 40px 20px; flex-direction: column; align-items: flex-start; }
+      .footer-copy { text-align: left; }
+      .discord-banner { padding: 28px 20px; }
+      .home-discord-wrap { padding: 0 20px 60px; }
+    }
+    @media (max-width: 480px) {
+      .artists-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <div class="fixed inset-0 pointer-events-none opacity-[0.03] z-50 bg-[url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain_Texture.png')]"></div>
+  <!-- SCRAWLED LETTER BACKGROUND -->
+  <div class="scrawl-bg">
+    <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <text x="20" y="38"  font-family="Georgia,serif" font-size="13" fill="white">and I can be taken at any time, I was in the Hospital a long time and discharged honorably. Will at once</text>
+      <text x="20" y="58"  font-family="Georgia,serif" font-size="13" fill="white">not or next my little from Beys I hope Jim he was this at if this to him. Well and in good Spirits he is</text>
+      <text x="20" y="78"  font-family="Georgia,serif" font-size="13" fill="white">to think the love worlds and I hope it may and I before this had it not best will now try to answer the day</text>
+      <text x="20" y="98"  font-family="Georgia,serif" font-size="13" fill="white">this the plan we are all well of and may these have found. I hear we were of importance. You inquired</text>
+      <text x="20" y="118" font-family="Georgia,serif" font-size="13" fill="white">about the Daily were not this. Notice sent I Served his time out and Mark away or at least he and his to</text>
+      <text x="20" y="138" font-family="Georgia,serif" font-size="13" fill="white">have gone to the best he is a and can be taken at any was in the Hospital ever and I can be taken at any</text>
+      <text x="20" y="158" font-family="Georgia,serif" font-size="13" fill="white">time, I was in the Hospital a long time and discharged honorably. Will at once not or next my little from</text>
+      <text x="20" y="178" font-family="Georgia,serif" font-size="13" fill="white">Beys I hope Jim he was this at if this to him. Well and in good Spirits he is to think the love worlds and</text>
+      <text x="20" y="198" font-family="Georgia,serif" font-size="13" fill="white">I hope it may and I before this had it not best will now try to answer the day this the plan we are all well</text>
+      <text x="20" y="218" font-family="Georgia,serif" font-size="13" fill="white">of and may these have found. I hear we were of importance. You inquired about the Daily were not this.</text>
+      <text x="20" y="238" font-family="Georgia,serif" font-size="13" fill="white">Notice sent I Served his time out and Mark away or at least he and his to have gone to the best he is a</text>
+      <text x="20" y="258" font-family="Georgia,serif" font-size="13" fill="white">and can be taken at any was in the Hospital and I can be taken at any time, I was in the Hospital a long</text>
+      <text x="20" y="278" font-family="Georgia,serif" font-size="13" fill="white">time and discharged honorably. Will at once not or next my little from Beys I hope Jim he was this at if</text>
+      <text x="20" y="298" font-family="Georgia,serif" font-size="13" fill="white">this to him. Well and in good Spirits he is to think the love worlds and I hope it may and I before this</text>
+      <text x="20" y="318" font-family="Georgia,serif" font-size="13" fill="white">had it not best will now try to answer the day this the plan we are all well of and may these have found.</text>
+      <text x="20" y="338" font-family="Georgia,serif" font-size="13" fill="white">I hear we were of importance. You inquired about the Daily were not this. Notice sent I Served his time</text>
+      <text x="20" y="358" font-family="Georgia,serif" font-size="13" fill="white">out and Mark away or at least he and his to have gone to the best he is a and can be taken at any was</text>
+      <text x="20" y="378" font-family="Georgia,serif" font-size="13" fill="white">in the Hospital ever and I can be taken at any time, I was in the Hospital a long time and discharged</text>
+      <text x="20" y="398" font-family="Georgia,serif" font-size="13" fill="white">honorably. Will at once not or next my little from Beys I hope Jim he was this at if this to him. Well and</text>
+      <text x="20" y="418" font-family="Georgia,serif" font-size="13" fill="white">in good Spirits he is to think the love worlds and I hope it may and I before this had it not best will now</text>
+      <text x="20" y="438" font-family="Georgia,serif" font-size="13" fill="white">try to answer the day this the plan we are all well of and may these have found. I hear we were of</text>
+      <text x="20" y="458" font-family="Georgia,serif" font-size="13" fill="white">importance. You inquired about the Daily were not this. Notice sent I Served his time out and Mark away</text>
+      <text x="20" y="478" font-family="Georgia,serif" font-size="13" fill="white">or at least he and his to have gone to the best he is a and can be taken at any was in the Hospital ever</text>
+      <text x="20" y="498" font-family="Georgia,serif" font-size="13" fill="white">and I can be taken at any time, I was in the Hospital a long time and discharged honorably. Will at once</text>
+      <text x="20" y="518" font-family="Georgia,serif" font-size="13" fill="white">not or next my little from Beys I hope Jim he was this at if this to him. Well and in good Spirits he is to</text>
+      <text x="20" y="538" font-family="Georgia,serif" font-size="13" fill="white">think the love worlds and I hope it may and I before this had it not best will now try to answer the day</text>
+      <text x="20" y="558" font-family="Georgia,serif" font-size="13" fill="white">this the plan we are all well of and may these have found. I hear we were of importance. You inquired</text>
+      <text x="20" y="578" font-family="Georgia,serif" font-size="13" fill="white">about the Daily were not this. Notice sent I Served his time out and Mark away or at least he and his to</text>
+      <text x="20" y="598" font-family="Georgia,serif" font-size="13" fill="white">have gone to the best he is a and can be taken at any was in the Hospital and I can be taken at any time</text>
+      <text x="20" y="618" font-family="Georgia,serif" font-size="13" fill="white">I was in the Hospital a long time and discharged honorably. Will at once not or next my little from Beys</text>
+      <text x="20" y="638" font-family="Georgia,serif" font-size="13" fill="white">I hope Jim he was this at if this to him. Well and in good Spirits he is to think the love worlds and I hope</text>
+      <text x="20" y="658" font-family="Georgia,serif" font-size="13" fill="white">it may and I before this had it not best will now try to answer the day this the plan we are all well of and</text>
+      <text x="20" y="678" font-family="Georgia,serif" font-size="13" fill="white">may these have found. I hear we were of importance. You inquired about the Daily were not this. Notice</text>
+      <text x="20" y="698" font-family="Georgia,serif" font-size="13" fill="white">sent I Served his time out and Mark away or at least he and his to have gone to the best he is a and can</text>
+      <text x="20" y="718" font-family="Georgia,serif" font-size="13" fill="white">be taken at any was in the Hospital ever and I can be taken at any time, I was in the Hospital a long time</text>
+      <text x="20" y="738" font-family="Georgia,serif" font-size="13" fill="white">and discharged honorably. Will at once not or next my little from Beys I hope Jim he was this at if this</text>
+      <text x="20" y="758" font-family="Georgia,serif" font-size="13" fill="white">to him. Well and in good Spirits he is to think the love worlds and I hope it may and I before this had it</text>
+      <text x="20" y="778" font-family="Georgia,serif" font-size="13" fill="white">not best will now try to answer the day this the plan we are all well of and may these have found. I hear</text>
+      <text x="20" y="798" font-family="Georgia,serif" font-size="13" fill="white">we were of importance. You inquired about the Daily were not this. Notice sent I Served his time out</text>
+      <text x="20" y="818" font-family="Georgia,serif" font-size="13" fill="white">and Mark away or at least he and his to have gone to the best he is a and can be taken at any was in the</text>
+      <text x="20" y="838" font-family="Georgia,serif" font-size="13" fill="white">Hospital ever and I can be taken at any time, I was in the Hospital a long time and discharged honorably</text>
+      <text x="20" y="858" font-family="Georgia,serif" font-size="13" fill="white">Will at once not or next my little from Beys I hope Jim he was this at if this to him. Well and in good</text>
+      <text x="20" y="878" font-family="Georgia,serif" font-size="13" fill="white">Spirits he is to think the love worlds and I hope it may and I before this had it not best will now try to</text>
+    </svg>
+  </div>
 
-    <nav class="flex justify-between items-center px-12 py-10 border-b border-white/[0.05]">
-        <div class="serif-title text-xl tracking-[0.4em]">HVN444</div>
-        <div class="flex space-x-12 text-[10px] uppercase tracking-[0.2em] font-light">
-            <a href="#roster" class="hover:text-gray-400 transition">Collective</a>
-            <a href="https://discord.gg/NQ54ycV8m" target="_blank" class="hover:text-gray-400 transition">Discord</a>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo" onclick="showPage('home'); return false;">HVN444</a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home'); return false;" id="nav-home" class="active">Home</a></li>
+      <li><a href="#" onclick="showPage('artists'); return false;" id="nav-artists">Artists</a></li>
+      <li><a href="#" onclick="showPage('about'); return false;" id="nav-about">About</a></li>
+      <li><a href="https://discord.gg/NQ54ycV8m" target="_blank">Discord</a></li>
+    </ul>
+    <a href="https://discord.gg/NQ54ycV8m" target="_blank" class="nav-discord">Join Discord</a>
+  </nav>
+
+  <!-- HOME -->
+  <div id="page-home" class="page-section active">
+    <section id="hero" style="max-width:100%; padding:0; min-height:100vh;">
+      <div class="hero-ghost">444</div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">— HVN444 Media · Est. 2025 —</p>
+        <h1 class="hero-title">HVN444</h1>
+        <div class="hero-rule"></div>
+        <p class="hero-tagline"><em>Ascend.</em> &nbsp;Your.&nbsp; <em>Sound.</em></p>
+        <div class="hero-cta">
+          <a href="#" class="btn-primary" onclick="showPage('artists'); return false;">Our Artists</a>
+          <a href="https://discord.gg/NQ54ycV8m" target="_blank" class="btn-outline">Join the Community</a>
         </div>
-    </nav>
+      </div>
+      <div class="scroll-indicator">
+        <span>Descend</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
 
-    <header class="py-40 text-center fade-in">
-        <h1 class="serif-title text-6xl md:text-8xl mb-6">HVN444</h1>
-        <p class="text-[11px] uppercase tracking-[0.8em] text-gray-500 italic">Ascend Your Sound</p>
-    </header>
+    <div class="home-discord-wrap">
+      <div class="discord-banner">
+        <div class="discord-text">
+          <h3>Join the HVN444 Community</h3>
+          <p>Connect with artists, fans, and the collective.</p>
+        </div>
+        <a href="https://discord.gg/NQ54ycV8m" target="_blank" class="btn-primary">discord.gg/NQ54ycV8m →</a>
+      </div>
+    </div>
+  </div>
 
-    <main class="max-w-6xl mx-auto px-8 pb-40">
-        
-        <div class="mb-32">
-            <h2 class="serif-title text-sm text-gray-600 mb-16 text-center tracking-[1em]">— OVER ALL —</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="artist-card text-center border-l border-white/[0.03] py-4">
-                    <h3 class="artist-name mb-4">120rnds</h3>
-                    <a href="https://open.spotify.com" class="spotify-link">Spotify</a>
-                </div>
-                <div class="artist-card text-center border-l border-white/[0.03] py-4">
-                    <h3 class="artist-name mb-4">StreetsNextNick</h3>
-                    <a href="https://open.spotify.com" class="spotify-link">Spotify</a>
-                </div>
-                <div class="artist-card text-center border-l border-white/[0.03] py-4">
-                    <h3 class="artist-name mb-4">Eurocyphic</h3>
-                    <a href="https://open.spotify.com" class="spotify-link">Spotify</a>
-                </div>
-            </div>
+  <!-- ARTISTS -->
+  <div id="page-artists" class="page-section">
+    <section>
+      <div class="section-header">
+        <span class="section-tag">— Roster —</span>
+        <div class="section-rule"></div>
+      </div>
+      <span class="year-badge">HVN444 · 2026</span>
+      <h2 class="section-title" style="margin-bottom: 64px;">Our Artists</h2>
+
+      <div class="tier">
+        <p class="tier-label">★ &emsp; Over All</p>
+        <div class="artists-grid">
+          <div class="artist-card">
+            <p class="artist-index">001</p>
+            <h3 class="artist-name over-all">120rnds</h3>
+            <span class="tier-icon">★</span>
+          </div>
+          <div class="artist-card">
+            <p class="artist-index">002</p>
+            <h3 class="artist-name over-all">StreetsNextNick</h3>
+            <span class="tier-icon">★</span>
+          </div>
+          <div class="artist-card">
+            <p class="artist-index">003</p>
+            <h3 class="artist-name over-all">Eurocyphic</h3>
+            <span class="tier-icon">★</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier">
+        <p class="tier-label">¥ &emsp; Artists</p>
+        <div class="artists-grid">
+          <div class="artist-card">
+            <p class="artist-index">004</p>
+            <h3 class="artist-name yen-tier">d4nii</h3>
+            <span class="tier-icon">¥</span>
+          </div>
+          <div class="artist-card">
+            <p class="artist-index">005</p>
+            <h3 class="artist-name yen-tier">KD!</h3>
+            <span class="tier-icon">¥</span>
+          </div>
+          <div class="artist-card">
+            <p class="artist-index">006</p>
+            <h3 class="artist-name yen-tier">xviiteen</h3>
+            <span class="tier-icon">¥</span>
+          </div>
+          <div class="artist-card">
+            <p class="artist-index">007</p>
+            <h3 class="artist-name yen-tier">uchiha42</h3>
+            <span class="tier-icon">¥</span>
+          </div>
+          <div class="artist-card">
+            <p class="artist-index">008</p>
+            <h3 class="artist-name yen-tier">sk3tch</h3>
+            <span class="tier-icon">¥</span>
+          </div>
+          <div class="artist-card">
+            <p class="artist-index">009</p>
+            <h3 class="artist-name yen-tier">33rnds</h3>
+            <span class="tier-icon">¥</span>
+          </div>
+          <div class="artist-card">
+            <p class="artist-index">010</p>
+            <h3 class="artist-name yen-tier">vax</h3>
+            <span class="tier-icon">¥</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="page-about" class="page-section">
+    <section>
+      <div class="section-header">
+        <span class="section-tag">— The Label —</span>
+        <div class="section-rule"></div>
+      </div>
+      <h2 class="section-title">About</h2>
+
+      <div class="about-grid" style="margin-top: 52px;">
+        <div>
+          <div class="about-text">
+            <p>HVN444 is an independent music label built on a single conviction — to elevate artists who are ready to ascend. We don't chase trends. We create them.</p>
+            <p>The People — the <strong>management</strong> and the rising <strong>artists</strong> — HVN444 nurtures talent at every stage, from the streets to the stratosphere.</p>
+            <p>Every sound we release is a statement. Every artist we sign is a movement. HVN444 is not just a label — it's a frequency.</p>
+          </div>
+          <div class="trademark-box">
+            <strong>HVN444</strong><br>
+            The HVN444 Name and logo are Trademarks by HVN444 Media.<br><br>
+            <span style="font-style:italic; font-size:0.85rem;">HVN444 — "Ascend. Your. Sound."</span>
+          </div>
         </div>
 
         <div>
-            <h2 class="serif-title text-sm text-gray-600 mb-16 text-center tracking-[1em]">— MEMBERS —</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-16">
-                <div class="artist-card">
-                    <p class="artist-name text-lg mb-2">d4nii</p>
-                    <a href="https://open.spotify.com/artist/4X9i0h9T6P9Rz0h" class="spotify-link">Spotify</a>
-                </div>
-                <div class="artist-card">
-                    <p class="artist-name text-lg mb-2">KD!</p>
-                    <a href="https://open.spotify.com/artist" class="spotify-link">Spotify</a>
-                </div>
-                <div class="artist-card">
-                    <p class="artist-name text-lg mb-2">xviiteen</p>
-                    <a href="https://open.spotify.com/artist/5Xv23n" class="spotify-link">Spotify</a>
-                </div>
-                <div class="artist-card">
-                    <p class="artist-name text-lg mb-2">uchiha42</p>
-                    <a href="https://open.spotify.com/artist" class="spotify-link">Spotify</a>
-                </div>
-                <div class="artist-card">
-                    <p class="artist-name text-lg mb-2">sk3tch</p>
-                    <a href="https://open.spotify.com/artist/2S7x" class="spotify-link">Spotify</a>
-                </div>
-                <div class="artist-card">
-                    <p class="artist-name text-lg mb-2">33rnds</p>
-                    <a href="https://open.spotify.com/artist" class="spotify-link">Spotify</a>
-                </div>
-                <div class="artist-card">
-                    <p class="artist-name text-lg mb-2">vax</p>
-                    <a href="https://open.spotify.com/artist/3P" class="spotify-link">Spotify</a>
-                </div>
+          <div class="stat-grid">
+            <div class="stat-box">
+              <span class="stat-num">10</span>
+              <span class="stat-label">Artists on Roster</span>
             </div>
+            <div class="stat-box">
+              <span class="stat-num">2</span>
+              <span class="stat-label">Owners</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">HVN444</span>
+              <span class="stat-label">The Number</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">2026</span>
+              <span class="stat-label">Our Year</span>
+            </div>
+          </div>
+          <div style="margin-top:1px; background:var(--border);">
+            <div class="stat-box" style="padding:28px;">
+              <span class="stat-num" style="font-size:1.3rem; font-style:italic; font-family:'IM Fell English',serif; color:var(--white2);">Ascend. Your. Sound.</span>
+              <span class="stat-label">The Mission</span>
+            </div>
+          </div>
+          <div style="margin-top: 40px;">
+            <div class="discord-banner" style="flex-direction:column; align-items:flex-start;">
+              <div class="discord-text">
+                <h3>Join the HVN444 Discord</h3>
+                <p>Be first to hear drops, collabs, and announcements.</p>
+              </div>
+              <a href="https://discord.gg/NQ54ycV8m" target="_blank" class="btn-primary" style="margin-top:8px;">discord.gg/NQ54ycV8m →</a>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
+  </div>
 
-    </main>
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-logo">HVN444</div>
+      <div class="footer-tagline">Ascend. Your. Sound.</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#" onclick="showPage('home'); return false;">Home</a></li>
+      <li><a href="#" onclick="showPage('artists'); return false;">Artists</a></li>
+      <li><a href="#" onclick="showPage('about'); return false;">About</a></li>
+      <li><a href="https://discord.gg/NQ54ycV8m" target="_blank">Discord</a></li>
+    </ul>
+    <div class="footer-copy">
+      © 2026 HVN444 Media<br>
+      HVN444 Name &amp; Logo are Trademarks of HVN444 Media
+    </div>
+  </footer>
 
-    <footer class="py-24 border-t border-white/[0.05] text-center">
-        <div class="serif-title text-2xl mb-8">HVN444</div>
-        <p class="text-[9px] tracking-[0.5em] text-gray-700 uppercase mb-4">
-            The HVN444 Name and logo are Trademarks by HVN444 Media.
-        </p>
-        <p class="text-[9px] tracking-[0.5em] text-gray-800 uppercase">
-            © 2026 HVN444 Media. All Rights Reserved.
-        </p>
-    </footer>
+  <script>
+    function showPage(page) {
+      document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+      document.getElementById('page-' + page).classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      const navEl = document.getElementById('nav-' + page);
+      if (navEl) navEl.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 
 </body>
 </html>
