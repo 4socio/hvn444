@@ -8,18 +8,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IM+Fell+English:ital@0;1&family=Space+Mono:wght@400;700&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #030303;
-      --surface: #0c0c0c;
-      --surface2: #121212;
-      --border: #1a1a1a;
-      --border2: #2a2a2a;
-      --white: #e8e4dc;
-      --white2: #c0bbaf;
-      --gray: #555550;
-      --text: #888880;
-      --accent: #d6d0c4;
-      --dim: rgba(220,215,200,0.06);
-      --glow: rgba(220,215,200,0.12);
+      --bg: #000000;
+      --surface: #0a0a0a;
+      --surface2: #141414;
+      --border: #1f1f1f;
+      --border2: #2e2e2e;
+      --white: #ffffff;
+      --white2: #d4d4d4;
+      --gray: #666666;
+      --text: #a3a3a3;
+      --accent: #eeeeee;
+      --dim: rgba(255, 255, 255, 0.05);
+      --glow: rgba(255, 255, 255, 0.1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,7 +38,7 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 70% at 50% 50%, transparent 40%, rgba(0,0,0,0.78) 100%),
+        radial-gradient(ellipse 70% 70% at 50% 50%, transparent 40%, rgba(0,0,0,0.85) 100%),
         url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 9000;
@@ -64,9 +64,9 @@
       align-items: center;
       justify-content: space-between;
       padding: 22px 52px;
-      background: linear-gradient(180deg, rgba(3,3,3,0.97) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0.97) 0%, transparent 100%);
       backdrop-filter: blur(6px);
-      border-bottom: 1px solid rgba(220,215,200,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .nav-logo {
@@ -138,7 +138,7 @@
       inset: 0;
       background-image: repeating-linear-gradient(
         0deg, transparent, transparent 39px,
-        rgba(220,215,200,0.025) 39px, rgba(220,215,200,0.025) 40px
+        rgba(255,255,255,0.025) 39px, rgba(255,255,255,0.025) 40px
       );
       pointer-events: none;
     }
@@ -150,7 +150,7 @@
       font-size: clamp(140px, 26vw, 380px);
       line-height: 1;
       color: transparent;
-      -webkit-text-stroke: 1px rgba(220,215,200,0.055);
+      -webkit-text-stroke: 1px rgba(255,255,255,0.055);
       letter-spacing: 0.02em;
       user-select: none;
       pointer-events: none;
@@ -183,7 +183,7 @@
       line-height: 0.92;
       letter-spacing: 0.06em;
       color: var(--white);
-      text-shadow: 0 0 80px rgba(220,215,200,0.07), 0 2px 4px rgba(0,0,0,0.9);
+      text-shadow: 0 0 80px rgba(255,255,255,0.07), 0 2px 4px rgba(0,0,0,0.9);
       opacity: 0;
       animation: riseIn 1s 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
     }
@@ -361,7 +361,7 @@
       inset: 0;
       background-image: repeating-linear-gradient(
         0deg, transparent, transparent 23px,
-        rgba(220,215,200,0.022) 23px, rgba(220,215,200,0.022) 24px
+        rgba(255,255,255,0.022) 23px, rgba(255,255,255,0.022) 24px
       );
       pointer-events: none;
     }
@@ -389,7 +389,6 @@
       transition: color 0.3s;
     }
     .artist-card:hover .artist-name { color: var(--accent); }
-    .artist-name.yen-tier { color: var(--white2); }
 
     .tier-icon {
       position: absolute;
@@ -397,12 +396,12 @@
       font-family: 'IM Fell English', serif;
       font-style: italic;
       font-size: 2.5rem;
-      color: rgba(220,215,200,0.04);
+      color: rgba(255,255,255,0.04);
       z-index: 0;
       line-height: 1;
       transition: color 0.3s;
     }
-    .artist-card:hover .tier-icon { color: rgba(220,215,200,0.09); }
+    .artist-card:hover .tier-icon { color: rgba(255,255,255,0.09); }
 
     /* DISCORD BANNER */
     .discord-banner {
@@ -706,49 +705,8 @@
           </div>
           <div class="artist-card">
             <p class="artist-index">003</p>
-            <h3 class="artist-name over-all">Eurocyphic</h3>
+            <h3 class="artist-name over-all">d4nii</h3>
             <span class="tier-icon">★</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tier">
-        <p class="tier-label">¥ &emsp; Artists</p>
-        <div class="artists-grid">
-          <div class="artist-card">
-            <p class="artist-index">004</p>
-            <h3 class="artist-name yen-tier">d4nii</h3>
-            <span class="tier-icon">¥</span>
-          </div>
-          <div class="artist-card">
-            <p class="artist-index">005</p>
-            <h3 class="artist-name yen-tier">KD!</h3>
-            <span class="tier-icon">¥</span>
-          </div>
-          <div class="artist-card">
-            <p class="artist-index">006</p>
-            <h3 class="artist-name yen-tier">xviiteen</h3>
-            <span class="tier-icon">¥</span>
-          </div>
-          <div class="artist-card">
-            <p class="artist-index">007</p>
-            <h3 class="artist-name yen-tier">uchiha42</h3>
-            <span class="tier-icon">¥</span>
-          </div>
-          <div class="artist-card">
-            <p class="artist-index">008</p>
-            <h3 class="artist-name yen-tier">sk3tch</h3>
-            <span class="tier-icon">¥</span>
-          </div>
-          <div class="artist-card">
-            <p class="artist-index">009</p>
-            <h3 class="artist-name yen-tier">33rnds</h3>
-            <span class="tier-icon">¥</span>
-          </div>
-          <div class="artist-card">
-            <p class="artist-index">010</p>
-            <h3 class="artist-name yen-tier">vax</h3>
-            <span class="tier-icon">¥</span>
           </div>
         </div>
       </div>
@@ -781,7 +739,7 @@
         <div>
           <div class="stat-grid">
             <div class="stat-box">
-              <span class="stat-num">10</span>
+              <span class="stat-num">3</span>
               <span class="stat-label">Artists on Roster</span>
             </div>
             <div class="stat-box">
@@ -836,15 +794,29 @@
   </footer>
 
   <script>
-    function showPage(page) {
-      document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
-      document.getElementById('page-' + page).classList.add('active');
-      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-      const navEl = document.getElementById('nav-' + page);
-      if (navEl) navEl.classList.add('active');
+    function showPage(pageId) {
+      // Hide all layout sections
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach(section => section.classList.remove('active'));
+      
+      // Target and display the requested page
+      const targetPage = document.getElementById('page-' + pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      }
+      
+      // Update top navbar navigation highlight selectors
+      const navLinks = document.querySelectorAll('.nav-links a');
+      navLinks.forEach(link => link.classList.remove('active'));
+      
+      const activeLink = document.getElementById('nav-' + pageId);
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+      
+      // Automatically shift browser view window up
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
-
 </body>
 </html>
