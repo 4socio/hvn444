@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>120rnds // SOURCE</title>
+    <!-- Lucide Icons for clean, tech-focused Y2K interfaces -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-color: #0d0e11;
+            --panel-bg: rgba(22, 24, 30, 0.75);
+            --border-color: #2a2e3d;
+            --accent-glow: #0077ff;
+            --text-main: #e2e8f0;
+            --text-muted: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Y2K CRT Matrix / Grid Background */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(42, 46, 61, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(42, 46, 61, 0.15) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Abstract Liquid Metal Orb Blur */
+        .liquid-blob {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: min-gradient(to right, #1e293b, var(--accent-glow));
+            filter: blur(80px);
+            border-radius: 50%;
+            opacity: 0.3;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        /* Main Interface Container */
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: var(--panel-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 0px; /* Sharp hardware edges */
+            padding: 25px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(255,255,255,0.02);
+            backdrop-filter: blur(12px);
+            z-index: 2;
+            position: relative;
+        }
+
+        /* UI Corner Brackets */
+        .container::before, .container::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 2px solid var(--accent-glow);
+        }
+        .container::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .container::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+        /* Header / Profile */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 15px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            background: #1e293b;
+            border: 1px solid var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-glow);
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        /* Hardware Hardware crosshairs */
+        .avatar-wrapper::before {
+            content: "[ PROD ]";
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-color);
+            padding: 2px 6px;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        .title {
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            color: var(--accent-glow);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Status / System Info Bar */
+        .sys-bar {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        .sys-status {
+            color: #00ff66;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .sys-status::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: #00ff66;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 6px #00ff66;
+        }
+
+        /* Links Section */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .link-card:hover {
+            background: rgba(0, 119, 255, 0.08);
+            border-color: var(--accent-glow);
+            color: #fff;
+            transform: translateY(-2px);
+            padding-left: 24px;
+        }
+
+        .link-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .link-icon {
+            color: var(--text-muted);
+            transition: color 0.25s ease;
+        }
+
+        .link-card:hover .link-icon {
+            color: var(--accent-glow);
+        }
+
+        .link-text {
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .link-arrow {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Bottom Status Footer */
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="liquid-blob"></div>
+
+    <div class="container">
+        
+        <!-- Header Profile -->
+        <div class="header">
+            <div class="avatar-wrapper">
+                <!-- Replace with an actual image URL if preferred, currently uses a clean tech box -->
+                <div class="avatar">120</div>
+            </div>
+            <h1 class="title">120rnds</h1>
+            <p class="subtitle">Music Producer</p>
+        </div>
+
+        <!-- System Ticker -->
+        <div class="sys-bar">
+            <span>LOC: // TX_CORE</span>
+            <span class="sys-status">ONLINE</span>
+        </div>
+
+        <!-- Bio Links -->
+        <div class="links-container">
+            
+            <!-- Spotify -->
+            <a href="https://open.spotify.com" target="_blank" class="link-card">
+                <div class="link-left">
+                    <i data-lucide="music" class="link-icon"></i>
+                    <span class="link-text">Spotify</span>
+                </div>
+                <span class="link-arrow">// GO</span>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/channel/UCfgwMgUzuOVfZIKW9e24wew" target="_blank" class="link-card">
+                <div class="link-left">
+                    <i data-lucide="youtube" class="link-icon"></i>
+                    <span class="link-text">Beats & Visuals</span>
+                </div>
+                <span class="link-arrow">// GO</span>
+            </a>
+
+            <!-- Discord -->
+            <a href="https://discord.com" target="_blank" class="link-card">
+                <div class="link-left">
+                    <i data-lucide="message-square" class="link-icon"></i>
+                    <span class="link-text">Discord Server (Soon)</span>
+                </div>
+                <span class="link-arrow">// JOIN</span>
+            </a>
+
+        </div>
+
+        <!-- Footer Visual -->
+        <div class="footer">
+            ©2026 HVN444. ALL RIGHTS RESERVED.
+        </div>
+    </div>
+
+    <!-- Initialize Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
