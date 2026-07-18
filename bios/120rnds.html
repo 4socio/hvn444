@@ -3,323 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>120rnds || HVN444</title>
-    <!-- Lucide Icons for clean, tech-focused Y2K interfaces -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>Amari - Profile</title>
     <style>
-        :root {
-            --bg-color: #000000;
-            --panel-bg: rgba(7, 7, 9, 0.85);
-            --border-color: #222222;
-            --accent-glow: #ffffff;
-            --text-main: #ffffff;
-            --text-muted: #555555;
-            --chrome-silver: linear-gradient(180deg, #ffffff 0%, #555555 50%, #ffffff 100%);
-        }
-
+        /* Base Reset & Font */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace;
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+        body, html {
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #C0C0C0; /* Silver text */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            overflow-x: hidden;
-            position: relative;
+            overflow: hidden;
         }
 
-        /* Y2K CRT Matrix Grid Background */
-        body::before {
-            content: "";
+        /* Blurred Nighttime City Skyline Background */
+        .bg-image {
             position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(40, 40, 40, 0.2) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(40, 40, 40, 0.2) 1px, transparent 1px);
-            background-size: 16px 16px;
-            z-index: 1;
-            pointer-events: none;
+            top: -20px; left: -20px; right: -20px; bottom: -20px;
+            /* High-quality Unsplash image of a night skyline */
+            background-image: url('https://images.unsplash.com/photo-1477959858617-679af054b036?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            filter: blur(12px) brightness(0.6);
+            z-index: -1;
         }
 
-        /* CRT Scanline Overlay Effect */
-        body::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(rgba(18, 18, 18, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            background-size: 100% 4px, 6px 100%;
-            z-index: 4;
-            pointer-events: none;
+        /* Main Profile Card */
+        .profile-card {
+            background: rgba(15, 15, 15, 0.75); /* Translucent Black */
+            border: 1px solid #404040;
+            border-radius: 12px;
+            padding: 35px 30px;
+            width: 360px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
 
-        /* Liquid Chrome Metal Orb Blur */
-        .liquid-blob {
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(40,40,40,0.05) 60%, transparent 100%);
-            filter: blur(50px);
-            border-radius: 50%;
-            top: 25%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-        }
-
-        /* Main Interface Container */
-        .container {
-            width: 100%;
-            max-width: 420px;
-            background: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 0px; /* Sharp hardware edges */
-            padding: 25px;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.9), inset 0 0 15px rgba(255,255,255,0.01);
-            backdrop-filter: blur(16px);
-            z-index: 2;
-            position: relative;
-        }
-
-        /* UI Corner Brackets (White/Chrome Tech accents) */
-        .container::before, .container::after {
-            content: "";
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border: 1px solid var(--accent-glow);
-        }
-        .container::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
-        .container::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
-
-        /* Header / Profile */
+        /* Header: PFP and Name */
         .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .avatar-wrapper {
-            position: relative;
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .avatar {
-            width: 100%;
-            height: 100%;
-            background: #000000;
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 1.3rem;
-            letter-spacing: -1px;
-            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
-            object-fit: cover; /* Ensures the image doesn't distort */
-        }
-
-        /* Hardware crosshairs tag */
-        .avatar-wrapper::before {
-            content: "[ PROD ]";
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #000000;
-            padding: 2px 6px;
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            white-space: nowrap;
-            z-index: 5;
-        }
-
-        .title {
-            font-size: 1.5rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        .subtitle {
-            font-size: 0.7rem;
-            color: #888888;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        /* Status / System Info Bar */
-        .sys-bar {
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--border-color);
-            padding: 8px 12px;
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 25px;
-        }
-        .sys-status {
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            letter-spacing: 1px;
-        }
-        .sys-status::before {
-            content: "";
-            width: 4px;
-            height: 4px;
-            background: #ffffff;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 6px #ffffff;
+            background-color: #2a2a2a;
+            /* INSERT YOUR PROFILE PICTURE URL BELOW */
+            background-image: url('YOUR_PROFILE_PICTURE_URL_HERE'); 
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #C0C0C0; /* Silver border */
         }
 
-        /* Links Section */
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .username {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(192, 192, 192, 0.5); /* Silver glow */
+        }
+
+        .badges {
+            font-size: 0.85rem;
+            margin-top: 5px;
+            color: #a0a0a0;
+        }
+
+        /* Link Buttons */
         .links-container {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .link-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid var(--border-color);
-            color: #aaaaaa;
+        .link-btn {
             text-decoration: none;
-            transition: all 0.2s ease-in-out;
-            position: relative;
+            color: #C0C0C0;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #505050;
+            padding: 12px 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
 
-        /* Heavy hover response */
-        .link-card:hover {
-            background: #ffffff;
-            border-color: #ffffff;
+        .link-btn:hover {
+            background: #C0C0C0;
             color: #000000;
-            padding-left: 24px;
+            border-color: #C0C0C0;
+            box-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
         }
 
-        .link-left {
+        /* Footer Stats */
+        .footer {
+            margin-top: 10px;
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: #888888;
+        }
+
+        .footer-item {
             display: flex;
             align-items: center;
-            gap: 15px;
-        }
-
-        .link-icon {
-            color: var(--text-muted);
-            transition: color 0.2s ease;
-        }
-
-        .link-card:hover .link-icon {
-            color: #000000;
-        }
-
-        .link-text {
-            font-size: 0.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .link-arrow {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            font-weight: bold;
-        }
-        .link-card:hover .link-arrow {
-            color: #000000;
-        }
-
-        /* Bottom Status Footer */
-        .footer {
-            margin-top: 35px;
-            text-align: center;
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            letter-spacing: 2px;
+            gap: 5px;
         }
     </style>
 </head>
 <body>
 
-    <div class="liquid-blob"></div>
+    <div class="bg-image"></div>
 
-    <div class="container">
-        
-        <!-- Header Profile -->
+    <div class="profile-card">
+        <!-- Header -->
         <div class="header">
-            <div class="avatar-wrapper">
-                <img class="avatar" src="https://cdn.discordapp.com/attachments/1363182585643274380/1417514755651932321/citrus_63c27ee0-cd7e-41a2-bd2c-bc31b7393a2c.jpg?ex=6a471bbd&is=6a45ca3d&hm=3e9c22992ad8f93d44173a033d51d4c7ff89bb33b58188e367d9bca76c5d19d8" alt="120rnds Profile Picture">
+            <div class="avatar"></div>
+            <div class="user-info">
+                <div class="username">amari</div>
+                <div class="badges">✓ ✦ ♱</div>
             </div>
-            <h1 class="title">120rnds</h1>
-            <p class="subtitle">Music Producer</p>
         </div>
 
-        <!-- System Ticker -->
-        <div class="sys-bar">
-            <span>HOST_LOC: // FORT WORTH, TX</span>
-            <span class="sys-status">ONLINE</span>
-        </div>
-
-        <!-- Bio Links -->
+        <!-- Links -->
         <div class="links-container">
-            
-            <!-- Spotify -->
-            <a href="https://open.spotify.com/artist/2htdaXB3C7pc1uFTz9F1YT?si=By74ziDXRvqRQhIEPecKtg" target="_blank" class="link-card">
-                <div class="link-left">
-                    <i data-lucide="music" class="link-icon"></i>
-                    <span class="link-text">Spotify</span>
-                </div>
-                <span class="link-arrow">// LINK</span>
-            </a>
-
-            <!-- YouTube -->
-            <a href="https://www.youtube.com/channel/UCfgwMgUzuOVfZIKW9e24wew" target="_blank" class="link-card">
-                <div class="link-left">
-                    <i data-lucide="youtube" class="link-icon"></i>
-                    <span class="link-text">YouTube</span>
-                </div>
-                <span class="link-arrow">// LINK</span>
-            </a>
-
-            <!-- Discord -->
-            <a href="https://discord.com" target="_blank" class="link-card">
-                <div class="link-left">
-                    <i data-lucide="message-square" class="link-icon"></i>
-                    <span class="link-text">Discord Server</span>
-                </div>
-                <span class="link-arrow">// JOIN</span>
-            </a>
-
+            <a href="#" class="link-btn">Spotify</a>
+            <a href="#" class="link-btn">YouTube</a>
+            <a href="#" class="link-btn">Twitch</a>
+            <a href="#" class="link-btn">Discord Server</a>
         </div>
 
-        <!-- Footer Visual -->
+        <!-- Footer -->
         <div class="footer">
-            ©2026 HVN444. ALL RIGHTS RESERVED.
+            <div class="footer-item">
+                <span>👁</span> 215,043
+            </div>
+            <div>|</div>
+            <div class="footer-item">
+                <span>📍</span> Fort Worth, TX
+            </div>
         </div>
     </div>
 
-    <!-- Initialize Icons -->
-    <script>
-        lucide.createIcons();
-    </script>
 </body>
 </html>
